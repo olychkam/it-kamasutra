@@ -1,0 +1,30 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.dialogs a{
+    color:white;
+    text-decoration: none;
+}
+.dialogs a.active{
+    color: cornflowerblue;
+}
+
+.dialogsItems {
+padding: 20px;
+}
+.dialogsItems .active{
+    color: cornflowerblue;
+}
+
+.dialog {
+
+}
+
+.messages {
+padding: 20px;
+}
+
+.message {
+
+}
