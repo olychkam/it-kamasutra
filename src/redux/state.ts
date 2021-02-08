@@ -46,7 +46,7 @@ const store: StoreType = {
         profilePage: {
             posts: [
                 {id: 1, message: 'It\'s my first post', likesCount: 23},
-                {id: 1, message: 'Hi, how are you?', likesCount: 48},
+                {id: 1, message: 'Hi, how are you??', likesCount: 48},
             ],
             messageForNewPost: ''
         },
