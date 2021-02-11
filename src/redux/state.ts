@@ -39,7 +39,10 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> |
+    ReturnType<typeof changeNewTextAC>|
+    ReturnType<typeof updateNewMessageAC>|
+    ReturnType<typeof sendMessageBodyAC>
 
 const store: StoreType = {
     _state: {
@@ -90,9 +93,11 @@ const store: StoreType = {
         } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
             this._state.dialogsPage.newMessageBody = action.body
             this._onChange()
-        }else if(action.type===SEND_MESSAGE){
+        }else if(action.type === SEND_MESSAGE){
             let body=this._state.dialogsPage.newMessageBody
-
+            this._state.dialogsPage.newMessageBody=''
+            this._state.dialogsPage.messages.push({id:6,message:body})
+            this._onChange()
         }
     }
 }
@@ -108,10 +113,15 @@ export let changeNewTextAC = (newText: string) => {
         newText: newText
     } as const
 }
-export let updateNewMessageBodyAC = (body: string) => {
+export let updateNewMessageAC = (body: string) => {
     return {
         type: UPDATE_NEW_MESSAGE_BODY,
-        body: body
+        body:body
+    } as const
+}
+export let sendMessageBodyAC = () => {
+    return {
+        type: SEND_MESSAGE,
     } as const
 }
 
