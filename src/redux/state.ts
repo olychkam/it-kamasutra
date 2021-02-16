@@ -1,8 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-const SEND_MESSAGE='SEND-MESSAGE';
-
+import profileReducer, {addPostAC, changeNewTextAC} from "./profile-reducer";
+import dialogsReducer, {sendMessageBodyAC, updateNewMessageAC} from "./dialogs-reducer";
 
 export type DialogsType = {
     id: number
@@ -40,9 +37,9 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 export type ActionsTypes = ReturnType<typeof addPostAC> |
-    ReturnType<typeof changeNewTextAC>|
-    ReturnType<typeof updateNewMessageAC>|
-    ReturnType<typeof sendMessageBodyAC>
+    ReturnType<typeof changeNewTextAC>|ReturnType<typeof updateNewMessageAC> |
+ReturnType<typeof sendMessageBodyAC>
+
 
 const store: StoreType = {
     _state: {
@@ -79,50 +76,12 @@ const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            const newPost: PostsType = {
-                id: new Date().getTime(),
-                message: action.postText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._onChange()
-        } else if (action.type === CHANGE_NEW_POST_TEXT) {
-            this._state.profilePage.messageForNewPost = action.newText
-            this._onChange()
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-            this._state.dialogsPage.newMessageBody = action.body
-            this._onChange()
-        }else if(action.type === SEND_MESSAGE){
-            let body=this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.newMessageBody=''
-            this._state.dialogsPage.messages.push({id:6,message:body})
-            this._onChange()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._onChange();
+
+
     }
-}
-export let addPostAC = (postText: string) => {
-    return {
-        type: ADD_POST,
-        postText: postText
-    } as const
-}
-export let changeNewTextAC = (newText: string) => {
-    return {
-        type: CHANGE_NEW_POST_TEXT,
-        newText: newText
-    } as const
-}
-export let updateNewMessageAC = (body: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body:body
-    } as const
-}
-export let sendMessageBodyAC = () => {
-    return {
-        type: SEND_MESSAGE,
-    } as const
 }
 
 

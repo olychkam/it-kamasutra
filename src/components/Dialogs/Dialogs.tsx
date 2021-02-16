@@ -8,9 +8,10 @@ import {
     DialogsPageType,
     DialogsType,
     MessagesType,
-    sendMessageBodyAC,
-    updateNewMessageAC
 } from "../../redux/state";
+
+import {sendMessageBodyAC, updateNewMessageAC} from "../../redux/dialogs-reducer";
+
 
 type DialogsPropsType = {
     dialogs: Array<DialogsType>

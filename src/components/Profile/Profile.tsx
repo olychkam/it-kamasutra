@@ -3,6 +3,7 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ActionsTypes, PostsType} from "../../redux/state";
 
+
 type ProfileType = {
     posts: Array<PostsType>
     message: string
