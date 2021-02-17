@@ -1,10 +1,9 @@
 import React from 'react';
-import s from './Settings.module.css';
 
-type SattingsType={
+type SettingsType={
     title:string
 }
-export function Settings(props:SattingsType){
+export function Settings(props:SettingsType){
     return(
         <div>{props.title}</div>
     )
