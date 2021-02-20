@@ -9,16 +9,14 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {StoreType} from "./redux/store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-    store: StoreType
+   // store: StoreType
 }
 
 function App(props: AppPropsType) {
-    const state = props.store.getState();
-    let message = state.dialogsPage.messages
-    let dialogs = state.dialogsPage.dialogs
-    let posts = state.profilePage.posts
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -26,14 +24,14 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route exact path="/dialogs" render={() =>
-                        <Dialogs messages={message}
+                        <DialogsContainer /*messages={message}
                                  dialogs={dialogs}
                                  dispatch={props.store.dispatch.bind(props.store)}
                                  newMessageBody={state.dialogsPage.newMessageBody}
-
+*/
                         />}/>
                     <Route exact path="/profile" render={() =>
-                        <Profile store={props.store} /*message={state.profilePage.messageForNewPost}*/
+                        <Profile /*store={props.store}*/ /*message={state.profilePage.messageForNewPost}*/
                             /*dispatch={props.store.dispatch.bind(props.store)}*/
                         />}/>
 

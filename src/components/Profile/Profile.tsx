@@ -8,7 +8,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 type ProfileType = {
     //posts: Array<PostsType>
     //message: string
-    store:StoreType
+    //store:StoreType
     //dispatch: (action: ActionsTypes) => void
 }
 
@@ -16,7 +16,7 @@ export function Profile(props: ProfileType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}/>
+            <MyPostsContainer/>
         </div>
     )
 }
