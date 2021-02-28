@@ -8,8 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {StoreType} from "./redux/store";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
    // store: StoreType
@@ -24,12 +23,8 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route exact path="/dialogs" render={() =>
-                        <DialogsContainer /*messages={message}
-                                 dialogs={dialogs}
-                                 dispatch={props.store.dispatch.bind(props.store)}
-                                 newMessageBody={state.dialogsPage.newMessageBody}
-*/
-                        />}/>
+                    <DialogsContainer/>
+                    }/>
                     <Route exact path="/profile" render={() =>
                         <Profile /*store={props.store}*/ /*message={state.profilePage.messageForNewPost}*/
                             /*dispatch={props.store.dispatch.bind(props.store)}*/

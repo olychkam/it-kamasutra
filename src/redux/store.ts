@@ -1,7 +1,7 @@
-import profileReducer, {addPostAC, changeNewTextAC} from "./profile-reducer";
-import dialogsReducer, {sendMessageBodyAC, updateNewMessageAC} from "./dialogs-reducer";
+import {addPostAC, changeNewTextAC} from "./profile-reducer";
+import {sendMessageBodyAC, updateNewMessageAC} from "./dialogs-reducer";
 
-export type DialogsType = {
+/*export type DialogsType = {
     id: number
     name: string
 }
@@ -34,13 +34,14 @@ export type StoreType = {
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => RootStateType
-    dispatch: (action: ActionsTypes) => void
-}
+    dispatch: (action: ActionsTypes) => void*/
+//}
 export type ActionsTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof changeNewTextAC>|ReturnType<typeof updateNewMessageAC> |
 ReturnType<typeof sendMessageBodyAC>
 
 
+/*
 const store: StoreType = {
     _state: {
         profilePage: {
@@ -84,5 +85,6 @@ const store: StoreType = {
     }
 }
 
+*/
 
-export default store;
+//export default store;

@@ -1,7 +1,16 @@
-import {ActionsTypes, DialogsPageType, DialogsType, MessagesType} from "./store";
+import {ActionsTypes} from "./store";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
+
+type DialogsType = {
+    id: number
+    name: string
+}
+type MessagesType = {
+    id: number
+    message: string
+}
 export type InitialStateType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
