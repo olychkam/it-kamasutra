@@ -1,7 +1,6 @@
 import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionsTypes} from "../../redux/store";
 import MyPostContainer from "./MyPosts/MyPostsContainer";
 
 

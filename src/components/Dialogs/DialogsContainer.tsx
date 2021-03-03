@@ -1,6 +1,5 @@
 import React from 'react';
-import {ActionsTypes} from "../../redux/store";
-import {InitialStateType, sendMessageBodyAC, updateNewMessageAC} from "../../redux/dialogs-reducer";
+import {ActionsTypes, InitialStateType, sendMessageBodyAC, updateNewMessageAC} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
@@ -17,7 +16,7 @@ export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: StateType):mapStateToPropsType => {
     return {
-        dialogsPage: state.dialogsReducer
+        dialogsPage: state.dialogsPage
     }
 }
 const mapDispatchToProps = (dispatch:(action:ActionsTypes) => void):mapDispatchToPropsType => {

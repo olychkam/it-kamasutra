@@ -1,11 +1,9 @@
-import React, {ChangeEvent} from 'react';
-import s from './MyPosts.module.css';
-import {Post} from "./Post/Post";
+import React from 'react';
 import {addPostAC, changeNewTextAC, InitialStateType} from "../../../redux/profile-reducer";
-import {ActionsTypes} from "../../../redux/store";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {StateType} from "../../../redux/redux-store";
+import {Dispatch} from "redux";
 
 /*
 export type MyPostsContainerType = {}
@@ -40,28 +38,29 @@ export function MyPostsContainer(props: MyPostsContainerType) {
 }
 */
 type mapDispatchToPropsType={
-    newTextChangeHandler:(text:string)=>void
+    newTextChangeHandler:(newText:string)=>void
     addPost:()=>void
 }
 type mapStateToPropsType={
     profilePage:InitialStateType
+    messageForNewPost:InitialStateType
 
 }
 export type MyPostsType=mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state:StateType):mapStateToPropsType => {
     return {
-        profilePage: state.profileReducer
+        profilePage:state.profilePage,
+        messageForNewPost:state.profilePage
     }
 }
-const mapDispatchToProps = (dispatch:(action:ActionsTypes) => void):mapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
     return {
         addPost:()=>{
             dispatch(addPostAC())
-            dispatch(changeNewTextAC(''))
         },
-        newTextChangeHandler:(text:string)=>{
-            dispatch(changeNewTextAC(text))
+        newTextChangeHandler:(newText:string)=>{
+            dispatch(changeNewTextAC(newText))
         }
     }
 }

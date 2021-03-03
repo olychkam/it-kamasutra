@@ -36,9 +36,9 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void*/
 //}
-export type ActionsTypes = ReturnType<typeof addPostAC> |
+/*export type ActionsTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof changeNewTextAC>|ReturnType<typeof updateNewMessageAC> |
-ReturnType<typeof sendMessageBodyAC>
+ReturnType<typeof sendMessageBodyAC>*/
 
 
 /*

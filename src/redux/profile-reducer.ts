@@ -1,7 +1,8 @@
-import {ActionsTypes} from "./store";
-
 const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT';
+
+export type ActionsTypes = ReturnType<typeof addPostAC> |
+    ReturnType<typeof changeNewTextAC>
 
 type PostsType = {
     id: number
@@ -14,14 +15,14 @@ export type InitialStateType = {
     messageForNewPost: string
 }
 
-export let initialState={
-        posts: [
-            {id: 1, message: 'It\'s my first post', likesCount: 23},
-            {id: 1, message: 'Hi, how are you??', likesCount: 48},
-        ],
-        messageForNewPost: ''
-    }
-const profileReducer = (state:InitialStateType=initialState, action: ActionsTypes):InitialStateType => {
+export let initialState = {
+    posts: [
+        {id: 1, message: 'It\'s my first post', likesCount: 23},
+        {id: 1, message: 'Hi, how are you??', likesCount: 48},
+    ],
+    messageForNewPost: ''
+}
+const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsType = {
@@ -29,11 +30,19 @@ const profileReducer = (state:InitialStateType=initialState, action: ActionsType
                 message: state.messageForNewPost,
                 likesCount: 0
             }
-            state.posts.push(newPost)
-            return state;
-        case CHANGE_NEW_POST_TEXT:
-            state.messageForNewPost = action.newText
-            return state;
+
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                messageForNewPost: ''
+            }
+
+        case CHANGE_NEW_POST_TEXT: {
+            return {
+                ...state,
+                messageForNewPost: action.newText
+            };
+        }
         default:
             return state;
     }
@@ -41,6 +50,7 @@ const profileReducer = (state:InitialStateType=initialState, action: ActionsType
 export let addPostAC = () => {
     return {
         type: ADD_POST,
+
     } as const
 }
 export let changeNewTextAC = (newText: string) => {
