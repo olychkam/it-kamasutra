@@ -10,6 +10,7 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {Users} from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 type AppPropsType = {
    // store: StoreType
@@ -34,7 +35,7 @@ function App(props: AppPropsType) {
                     <Route exact path="/music" render={() => <Music title={'Music'}/>}/>
                     <Route exact path="/news" render={() => <News title={'News'}/>}/>
                     <Route exact path="/settings" render={() => <Settings title={'Settings'}/>}/>
-                    <Route exact path="/users" render={() => <Users/>}/>
+                    <Route exact path="/users" render={() => <UsersContainer/>}/>
                 </div>
             </div>
         </BrowserRouter>

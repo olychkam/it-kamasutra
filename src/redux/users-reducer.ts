@@ -1,19 +1,20 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
-const SETUSERS = 'SET-USERS';
+const SET_USERS = 'SET-USERS';
 
 export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC>|ReturnType<typeof setUsersAC>
 
-type LocationType = {
+export type LocationType = {
     city: string
     country: string
 }
-type UsersType = {
+export type UsersType = {
     id: number
     status: string
     followed: boolean
     fullName: string
     location: LocationType
+    photoUrl:string
 }
 
 export type InitialStateType = {
@@ -21,29 +22,7 @@ export type InitialStateType = {
 }
 
 export let initialState: InitialStateType = {
-    users: [
-        {
-            id: 1,
-            status: 'It\'s my first post',
-            followed: false,
-            fullName: 'Olya',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 2,
-            status: 'It\'s my first post',
-            followed: true,
-            fullName: 'Katya',
-            location: {city: 'Moscow', country: 'Russia'}
-        },
-        {
-            id: 3,
-            status: 'It\'s my first post',
-            followed: false,
-            fullName: 'Slava',
-            location: {city: 'Kiev', country: 'Ukraine'}
-        }
-    ],
+    users: []
 }
 const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
@@ -67,9 +46,11 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                     return u;
                 })
             }
-       // case SETUSERS:
-
-
+      case SET_USERS:
+          return{
+              ...state,
+              users:[...state.users, ...action.users]
+          }
 
         default:
             return state;
@@ -89,9 +70,9 @@ export let unFollowAC = (userId: number) => {
 
     } as const
 }
-export let setUsersAC = (users: string) => {
+export let setUsersAC = (users: Array<UsersType>) => {
     return {
-        type: SETUSERS,
+        type: SET_USERS,
         users
 
     } as const
