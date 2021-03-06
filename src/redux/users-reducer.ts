@@ -2,7 +2,7 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 
-export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC>|ReturnType<typeof setUsersAC>
+export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
 
 export type LocationType = {
     city: string
@@ -10,11 +10,14 @@ export type LocationType = {
 }
 export type UsersType = {
     id: number
-    status: string
+    status:  string | null
     followed: boolean
-    fullName: string
+    name: string
     location: LocationType
-    photoUrl:string
+    photos: {
+        small: string | undefined
+        large: string | undefined
+    }
 }
 
 export type InitialStateType = {
@@ -46,11 +49,11 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                     return u;
                 })
             }
-      case SET_USERS:
-          return{
-              ...state,
-              users:[...state.users, ...action.users]
-          }
+        case SET_USERS:
+            return {
+                ...state,
+                users: [...state.users, ...action.users]
+            }
 
         default:
             return state;
