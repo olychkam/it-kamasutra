@@ -3,13 +3,17 @@ import {UsersPropsType} from "./UsersContainer";
 import s from './Users.module.css'
 import axios from "axios";
 import usersPhoto from '../../assets/images/users.png'
-import {render} from "react-dom";
 
- class Users extends React.Component {
-    constructor(props:UsersPropsType) {
-        super(props);
+class UsersC extends React.Component<UsersPropsType> {
+    /* constructor(props:UsersPropsType) {
+         super(props);
+         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+             props.setUsers(response.data.items)
+         })
+     }*/
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(response.data.items)
+            this.props.setUsers(response.data.items)
         })
     }
 
@@ -39,3 +43,4 @@ import {render} from "react-dom";
         </div>
     }
 }
+export default UsersC;
