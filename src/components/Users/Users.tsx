@@ -1,10 +1,10 @@
 import React from 'react';
-import {UsersPropsType} from "./UsersContainer";
+import {UsersApiPropsType} from "./UsersContainer";
 import s from './Users.module.css'
 import axios from "axios";
 import usersPhoto from '../../assets/images/users.png'
 
-export const Users = (props: UsersPropsType) => {
+export const Users = (props: UsersApiPropsType) => {
     let getUsers = () => {
         if (props.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
