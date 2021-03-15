@@ -4,7 +4,7 @@ import s from './Users.module.css'
 import axios from "axios";
 import usersPhoto from '../../assets/images/users.png'
 import {inspect} from "util";
-import {setCurrentPageAC, UsersType} from "../../redux/users-reducer";
+import {setCurrentPage, UsersType} from "../../redux/users-reducer";
 
 export type UsersPropsType={
     users: Array<UsersType>,
