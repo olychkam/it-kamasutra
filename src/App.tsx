@@ -29,7 +29,7 @@ function App(props: AppPropsType) {
                     <Route exact path="/dialogs" render={() =>
                     <DialogsContainer/>
                     }/>
-                    <Route exact path={'/profile'} render={() =>
+                    <Route exact path={'/profile:userId'} render={() =>
                         <ProfileContainer /*store={props.store}*/ /*message={state.profilePage.messageForNewPost}*/
                             /*dispatch={props.store.dispatch.bind(props.store)}*/
                         />}/>
