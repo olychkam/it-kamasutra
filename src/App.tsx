@@ -11,6 +11,8 @@ import {Settings} from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {Users} from "./components/Users/Users";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import {setUserProfile} from "./redux/profile-reducer";
 
 type AppPropsType = {
    // store: StoreType
@@ -27,8 +29,8 @@ function App(props: AppPropsType) {
                     <Route exact path="/dialogs" render={() =>
                     <DialogsContainer/>
                     }/>
-                    <Route exact path="/profile" render={() =>
-                        <Profile /*store={props.store}*/ /*message={state.profilePage.messageForNewPost}*/
+                    <Route exact path={'/profile'} render={() =>
+                        <ProfileContainer /*store={props.store}*/ /*message={state.profilePage.messageForNewPost}*/
                             /*dispatch={props.store.dispatch.bind(props.store)}*/
                         />}/>
 
