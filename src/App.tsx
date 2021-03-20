@@ -13,6 +13,7 @@ import {Users} from "./components/Users/Users";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {setUserProfile} from "./redux/profile-reducer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type AppPropsType = {
    // store: StoreType
@@ -23,7 +24,7 @@ function App(props: AppPropsType) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route exact path="/dialogs" render={() =>
