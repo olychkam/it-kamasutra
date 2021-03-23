@@ -45,11 +45,39 @@ const UsersC = (props: UsersPropsType) => {
                     </NavLink>
                 </div>
                 <div>
-                    {u.followed === true ? <button onClick={() => {
-                        props.unFollow(u.id)
-                    }}>unFollow</button> : <button onClick={() => {
-                        props.follow(u.id)
-                    }}>Follow</button>
+                    {u.followed === true ?
+
+                        <button onClick={() => {
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                withCredentials: true,
+                                headers: {
+                                    'API-KEY': 'bac44229-6d89-4751-9bb8-e457dc22d531'
+                                }
+                            })
+
+                                .then(response => {
+                                    if (response.data.resultCode === 0) {
+                                        props.unFollow(u.id)
+                                    }
+                                })
+
+
+                        }}>unFollow</button>
+
+                        : <button onClick={() => {
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {
+                                withCredentials: true,
+                                headers: {
+                                    'API-KEY': 'bac44229-6d89-4751-9bb8-e457dc22d531'
+                                }
+                            })
+                                .then(response => {
+                                    if(response.data.resultCode===0) {
+                                        props.follow(u.id)
+                                    }
+                                })
+
+                        }}>Follow</button>
                     }
                 </div>
             </span>
