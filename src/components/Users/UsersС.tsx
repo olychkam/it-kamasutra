@@ -4,7 +4,7 @@ import s from './Users.module.css'
 import axios from "axios";
 import usersPhoto from '../../assets/images/users.png'
 import {inspect} from "util";
-import {setCurrentPage, UsersType} from "../../redux/users-reducer";
+import {setCurrentPage, setToggleIsFetching, UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 
 export type UsersPropsType = {
@@ -18,6 +18,7 @@ export type UsersPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     onPageChanged: (pageNumber: number) => void
+    setToggleIsFetching: (isFetching: boolean) => void
 
 }
 const UsersC = (props: UsersPropsType) => {
@@ -40,7 +41,7 @@ const UsersC = (props: UsersPropsType) => {
             props.users.map(u => <div key={u.id}>
             <span>
                 <div>
-                    <NavLink to={'/profile'+u.id}>
+                    <NavLink to={'/profile' + u.id}>
                     <img src={u.photos.small != null ? u.photos.small : usersPhoto} className={s.user}/>
                     </NavLink>
                 </div>
@@ -48,6 +49,7 @@ const UsersC = (props: UsersPropsType) => {
                     {u.followed === true ?
 
                         <button onClick={() => {
+                            props.setToggleIsFetching(false)
                             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                 withCredentials: true,
                                 headers: {
@@ -59,22 +61,25 @@ const UsersC = (props: UsersPropsType) => {
                                     if (response.data.resultCode === 0) {
                                         props.unFollow(u.id)
                                     }
+                                    props.setToggleIsFetching(true)
                                 })
 
 
                         }}>unFollow</button>
 
                         : <button onClick={() => {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {
+                            props.setToggleIsFetching(true)
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                 withCredentials: true,
                                 headers: {
                                     'API-KEY': 'bac44229-6d89-4751-9bb8-e457dc22d531'
                                 }
                             })
                                 .then(response => {
-                                    if(response.data.resultCode===0) {
+                                    if (response.data.resultCode === 0) {
                                         props.follow(u.id)
                                     }
+                                    props.setToggleIsFetching(false)
                                 })
 
                         }}>Follow</button>

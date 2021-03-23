@@ -76,6 +76,7 @@ class UsersContainer extends React.Component<UsersApiPropsType> {
                     unFollow={this.props.unFollow}
                     users={this.props.users}
                     onPageChanged={this.onPageChanged}
+                    setToggleIsFetching={this.props.setToggleIsFetching}
             />
         </>
     }

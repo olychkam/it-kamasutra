@@ -4,13 +4,15 @@ const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
 
 export type ActionsTypes = ReturnType<typeof follow> |
     ReturnType<typeof unFollow> |
     ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
-    ReturnType<typeof setToggleIsFetching>
+    ReturnType<typeof setToggleIsFetching>|
+    ReturnType<typeof setFollowingIsFetching>
 
 
 export type LocationType = {
@@ -34,7 +36,8 @@ export type InitialStateType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress:boolean
 }
 
 export let initialState: InitialStateType = {
@@ -42,7 +45,8 @@ export let initialState: InitialStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 2,
-    isFetching: true
+    isFetching: true,
+    followingInProgress:false
 }
 const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
@@ -90,6 +94,12 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                 isFetching: action.isFetching
             }
         }
+        case TOGGLE_IS_FOLLOWING_PROGRESS: {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+            }
+        }
 
         default:
             return state;
@@ -132,6 +142,12 @@ export let setTotalUsersCount = (totalCount: number) => {
 export let setToggleIsFetching = (isFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
+        isFetching
+    } as const
+}
+export let setFollowingIsFetching = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,
         isFetching
     } as const
 }
