@@ -18,8 +18,8 @@ export type UsersPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     onPageChanged: (pageNumber: number) => void
-    setToggleIsFetching: (isFetching: boolean) => void
-
+    toggleFollowingIsProgress: (isFetching: boolean,userId:number) => void,
+    followingInProgress:Array<number>
 }
 const UsersC = (props: UsersPropsType) => {
 
@@ -48,8 +48,8 @@ const UsersC = (props: UsersPropsType) => {
                 <div>
                     {u.followed === true ?
 
-                        <button onClick={() => {
-                            props.setToggleIsFetching(false)
+                        <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+                            props.toggleFollowingIsProgress(false,u.id)
                             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                 withCredentials: true,
                                 headers: {
@@ -61,14 +61,14 @@ const UsersC = (props: UsersPropsType) => {
                                     if (response.data.resultCode === 0) {
                                         props.unFollow(u.id)
                                     }
-                                    props.setToggleIsFetching(true)
+                                    props.toggleFollowingIsProgress(true,u.id)
                                 })
 
 
                         }}>unFollow</button>
 
-                        : <button onClick={() => {
-                            props.setToggleIsFetching(true)
+                        : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+                            props.toggleFollowingIsProgress(true,u.id)
                             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                 withCredentials: true,
                                 headers: {
@@ -79,7 +79,7 @@ const UsersC = (props: UsersPropsType) => {
                                     if (response.data.resultCode === 0) {
                                         props.follow(u.id)
                                     }
-                                    props.setToggleIsFetching(false)
+                                    props.toggleFollowingIsProgress(false,u.id)
                                 })
 
                         }}>Follow</button>
