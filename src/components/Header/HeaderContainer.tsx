@@ -4,8 +4,9 @@ import {NavLink} from "react-router-dom";
 import {Header} from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
-import {InitialStateType, setUserData, UserDataType} from "../../redux/auth-reducer";
+import {getUserData, InitialStateType, setUserData, UserDataType} from "../../redux/auth-reducer";
 import {StateType} from "../../redux/redux-store";
+import {authAPI} from "../../api/api";
 
 type HeaderContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -19,14 +20,7 @@ type mapDispatchToPropsType = {
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true
-        }).then(response => {
-            if (response.data.resultCode === 0) {
-                this.props.setUserData(response.data.data)
-            }
-        })
-    }
+        getUserData()    }
 
     render() {
         return (
@@ -41,4 +35,4 @@ const mapStateToProps = (state: StateType): mapStateToPropsType => ({
 
 });
 
-export default connect(mapStateToProps, {setUserData})(HeaderContainer);
+export default connect(mapStateToProps, {getUserData})(HeaderContainer);

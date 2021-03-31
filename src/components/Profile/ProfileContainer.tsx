@@ -3,9 +3,10 @@ import {Profile} from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
-import {ProfileType, setUserProfile} from "../../redux/profile-reducer";
+import {getUserProfile, ProfileType, setUserProfile} from "../../redux/profile-reducer";
 import Prealoder from "../common/prealoder/Prealoder";
-import {RouteComponentProps, withRouter } from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {usersAPI} from "../../api/api";
 
 
 /*type ProfileType = {
@@ -15,33 +16,31 @@ import {RouteComponentProps, withRouter } from 'react-router-dom';
     //dispatch: (action: ActionsTypes) => void
 }*/
 type mapStateToPropsType = {
-    profile:ProfileType | null
+    profile: ProfileType | null
 }
 type mapDispatchToPropsType = {
-    setUserProfile: (profile: ProfileType) => void
+    getUserProfile: (userId: string) => void
 }
 
-type PatchParamsType={
-    userId:string
+type PatchParamsType = {
+    userId: string
 }
 type onProfileContainerType = mapStateToPropsType & mapDispatchToPropsType
 
-type ProfileContainerType=RouteComponentProps<PatchParamsType>&onProfileContainerType
+type ProfileContainerType = RouteComponentProps<PatchParamsType> & onProfileContainerType
+
 class ProfileContainer extends React.Component<ProfileContainerType> {
-    componentDidMount(){
-        let userId=this.props.match.params.userId
-        if(!userId){
-            userId='2'
+    componentDidMount() {
+        let userId = this.props.match.params.userId
+        if (!userId) {
+            userId = '2'
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId).then(response => {
-            debugger
-            this.props.setUserProfile(response.data);
-        })
+        this.props.getUserProfile(userId)
     }
 
     render() {
-        if(!this.props.profile){
-           return  <Prealoder/>
+        if (!this.props.profile) {
+            return <Prealoder/>
         }
         return (
             <div>
@@ -55,5 +54,5 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
 const mapStateToProps = (state: StateType): mapStateToPropsType => ({
     profile: state.profilePage.profile
 })
-let withUrlDataContainerComponent=withRouter(ProfileContainer)
-export default connect(mapStateToProps, {setUserProfile})(withUrlDataContainerComponent);
+let withUrlDataContainerComponent = withRouter(ProfileContainer)
+export default connect(mapStateToProps, {getUserProfile})(withUrlDataContainerComponent);

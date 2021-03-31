@@ -1,4 +1,6 @@
 import {ProfileType} from "./profile-reducer";
+import {authAPI, usersAPI} from "../api/api";
+import {toggleFollowingIsProgress, unFollowSuccess} from "./users-reducer";
 
 const SET_USER_DATA = 'SET-USER-DATA';
 
@@ -38,6 +40,16 @@ export let setUserData = (data: UserDataType) => {
         type: SET_USER_DATA,
         data
     } as const
+}
+export const getUserData=()=>(dispatch:any)=>{
+    authAPI.me()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+
+                dispatch(setUserData(response.data.data))
+            }
+        })
+
 }
 
 export default authReducer;
