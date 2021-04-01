@@ -20,6 +20,7 @@ import axios from "axios";
 import preolader from '../../assets/images/preolader1.gif'
 import Prealoder from "../common/prealoder/Prealoder";
 import {usersAPI} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type mapStateToPropsType = {
     users: Array<UsersType>,
@@ -123,7 +124,7 @@ const
     }
 }*/
 
-
+let withRedirect=withAuthRedirect(UsersContainer);
 export default connect(mapStateToProps, {
     follow,
     unFollow,
@@ -136,5 +137,5 @@ export default connect(mapStateToProps, {
 })
 
 (
-    UsersContainer
+    withRedirect
 );

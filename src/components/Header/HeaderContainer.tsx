@@ -14,12 +14,12 @@ type mapStateToPropsType = {
     data: UserDataType
 }
 type mapDispatchToPropsType = {
-    getUserData: (data: UserDataType) => void
+    getUserData: () => void
 }
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
     componentDidMount() {
-        getUserData()    }
+        this.props.getUserData()    }
 
     render() {
         return (
