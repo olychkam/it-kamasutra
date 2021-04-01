@@ -13,6 +13,7 @@ import {Users} from "./components/Users/Users";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {setUserProfile} from "./redux/profile-reducer";
+import {Login} from "./components/Login/Login";
 import HeaderContainer from "./components/Header/HeaderContainer";
 
 type AppPropsType = {
@@ -39,6 +40,7 @@ function App(props: AppPropsType) {
                     <Route exact path="/news" render={() => <News title={'News'}/>}/>
                     <Route exact path="/settings" render={() => <Settings title={'Settings'}/>}/>
                     <Route exact path="/users" render={() => <UsersContainer/>}/>
+                    <Route exact path="/login" render={() => <Login/>}/>
                 </div>
             </div>
         </BrowserRouter>

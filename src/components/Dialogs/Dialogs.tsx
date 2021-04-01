@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from 'react-router-dom';
 
 
 /*export type DialogsPropsType = {
@@ -32,6 +33,7 @@ export function Dialogs(props: DialogsPropsType) {
      const addMessage=()=>{
          alert(addMessageRef.current?.value)
      }*/
+    if(!props.isAuth)return <Redirect to={'/login'}/>
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

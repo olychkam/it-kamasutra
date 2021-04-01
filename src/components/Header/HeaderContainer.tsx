@@ -4,9 +4,8 @@ import {NavLink} from "react-router-dom";
 import {Header} from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
-import {getUserData, InitialStateType, setUserData, UserDataType} from "../../redux/auth-reducer";
+import {getUserData, UserDataType} from "../../redux/auth-reducer";
 import {StateType} from "../../redux/redux-store";
-import {authAPI} from "../../api/api";
 
 type HeaderContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -15,7 +14,7 @@ type mapStateToPropsType = {
     data: UserDataType
 }
 type mapDispatchToPropsType = {
-    setUserData: (data: UserDataType) => void
+    getUserData: (data: UserDataType) => void
 }
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
