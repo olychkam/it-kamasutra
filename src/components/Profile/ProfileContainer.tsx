@@ -8,6 +8,7 @@ import Prealoder from "../common/prealoder/Prealoder";
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 import {usersAPI} from "../../api/api";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 /*type ProfileType = {
@@ -53,10 +54,13 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
-
 const mapStateToProps = (state: StateType): mapStateToPropsType => ({
     profile: state.profilePage.profile,
 })
-let withUrlDataContainerComponent = withRouter(AuthRedirectComponent)
-export default connect(mapStateToProps, {getUserProfile})(withUrlDataContainerComponent);
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getUserProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
+
+
