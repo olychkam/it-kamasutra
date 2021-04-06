@@ -25,6 +25,7 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string) => void
+    updateStatus:(status:string)=>void
 }
 
 type PatchParamsType = {
@@ -53,7 +54,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
             <div>
                 <Profile {...this.props} profile={this.props.profile}
                          status={this.props.status}
-                updateStatus={this.props.updateStatus}/>
+                         updateStatus={this.props.updateStatus}/>
             </div>
         )
     }

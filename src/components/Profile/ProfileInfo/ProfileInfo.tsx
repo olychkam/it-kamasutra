@@ -7,7 +7,7 @@ import {ProfileStatus} from "./ProfileStatus";
 type ProfileInfoType={
     profile:ProfileType
     status:string
-    updateStatus:string
+    updateStatus:(status:string)=>void
 }
 
 export function ProfileInfo(props:ProfileInfoType) {

@@ -3,10 +3,14 @@ import s from './ProfileInfo.module.css';
 
 type ProfileStatusType = {
     status: string
-    updateStatus:string
+    updateStatus:(status:string)=>void
+}
+type ProfileStatusStateType={
+    editMode:boolean
+    status:string
 }
 
-export class ProfileStatus extends React.Component<ProfileStatusType, any> {
+export class ProfileStatus extends React.Component<ProfileStatusType, ProfileStatusStateType> {
     state = {
         editMode: false,
         status: this.props.status

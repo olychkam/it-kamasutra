@@ -2,13 +2,13 @@ import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import MyPostContainer from "./MyPosts/MyPostsContainer";
-import {ProfileType} from "../../redux/profile-reducer";
+import {ProfileType, updateStatus} from "../../redux/profile-reducer";
 
 
 type ProfileTypes = {
     profile:ProfileType
     status:string
-    updateStatus:string
+    updateStatus:(status:string)=>void
     //posts: Array<PostsType>
     //message: string
     //store:StoreType
