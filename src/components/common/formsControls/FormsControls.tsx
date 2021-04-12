@@ -4,26 +4,15 @@ import styles from './FormsControls.module.css'
 
 type TextareaType = {}
 
-export const FormsControls: React.FC<WrappedFieldProps> = (
-    {meta, input,child, ...props}) => {
-    const hasError = meta.touched && meta.error;
+export const FormsControls = (Element: string) => ({input, meta, ...props}: WrappedFieldProps &
+    InputHTMLAttributes<HTMLInputElement>) => {
+    const hasError = meta.touched && meta.error
     return (
-        <div className={styles.formControl + " " + (hasError ? styles.error : '')}>
-            <div>{props.child}
-            </div>
-            {hasError && <span>{meta.error}</span>}
-        </div>
+        <>
+            <Element className={meta.touched && meta.error ? styles.error : ''} {...input} {...props}/>
+            {hasError && <span className={styles.spanError}>{meta.error}</span>}
+        </>
     )
 }
-export const Textarea: React.FC<WrappedFieldProps> = (
-    {meta, input, ...props}) => {
-    return (
-            <FormsControls {...props}><textarea {...input} {...props}/></FormsControls>
-    )
-}
-export const Input: React.FC<WrappedFieldProps> = (
-    {meta, input, ...props}) => {
-    return (
-        <FormsControls {...props}><input {...input} {...props}/></FormsControls>
-    )
-}
+export const FormElementInput = FormsControls('input')
+export const FormElementTextArea = FormsControls('textarea')
