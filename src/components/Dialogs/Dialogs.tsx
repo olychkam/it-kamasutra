@@ -5,6 +5,7 @@ import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Redirect} from 'react-router-dom';
+import {AddMessageReduxForm} from "./addMessageForm";
 
 
 /*export type DialogsPropsType = {
@@ -21,13 +22,9 @@ export function Dialogs(props: DialogsPropsType) {
     let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
     let newMessageBody = props.dialogsPage.newMessageBody;
 
-    let onSendMessageClick = () => {
-        props.sendMessage();
-    }
 
-    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value
-        props.updateNewMessageBody(body);
+    let addNewMessage = (values: any) => {
+        props.sendMessage(values.newMessageBody)
     }
     /* let addMessageRef=React.createRef<HTMLTextAreaElement>()
      const addMessage=()=>{
@@ -43,13 +40,9 @@ export function Dialogs(props: DialogsPropsType) {
                 {messagesElements}
             </div>
             <div>
-                <textarea value={newMessageBody}
-                          onChange={onNewMessageChange}
-                          placeholder='Enter your message'></textarea>
+                <AddMessageReduxForm onSubmit={addNewMessage}/>
             </div>
-            <div>
-                <button onClick={onSendMessageClick}>addMessage</button>
-            </div>
+
         </div>
     )
 }

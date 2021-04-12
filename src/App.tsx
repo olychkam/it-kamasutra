@@ -15,6 +15,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import {setUserProfile} from "./redux/profile-reducer";
 import {Login} from "./components/Login/Login";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import {LoginForm} from "./components/Login/LoginForm";
 
 type AppPropsType = {
    // store: StoreType
