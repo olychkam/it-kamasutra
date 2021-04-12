@@ -37,12 +37,12 @@ export function MyPosts(props: MyPostsType) {
         props.newTextChangeHandler(text)
        // props.dispatch(changeNewTextAC(text))
     }*/
-    debugger
+
     return (
         <div className={s.postsBlock}>
             <h3>Hi</h3>
 
-            <AddPostReduxForm onSubmit={addNewPost}/>
+            <AddPostReduxForm onSubmit={addNewPost}  />
             <div className={s.posts}>
                 {postsElement}
             </div>
