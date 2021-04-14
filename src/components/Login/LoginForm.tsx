@@ -13,14 +13,15 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name={'Login'} component={FormElementInput}
-                       placeholder={'Login'}
+                <Field name={'login'} component={FormElementInput}
+                       placeholder={'login'}
                        validate={[required]}/>
             </div>
             <div>
-                <Field name={'Password'} component={FormElementInput}
+                <Field name={'password'} component={FormElementInput}
                        placeholder={'Password'}
-                       validate={[required]}/>
+                       validate={[required]}
+                type={'password'}/>
             </div>
             <div>
                 <Field name={'rememberMe'} component={FormElementInput}

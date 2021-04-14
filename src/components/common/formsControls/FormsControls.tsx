@@ -10,7 +10,7 @@ export const FormsControls = (Element: string) => ({input, meta, ...props}: Wrap
     return (
         <>
             <Element className={meta.touched && meta.error ? styles.error : ''} {...input} {...props}/>
-            {hasError && <span className={styles.spanError}>{meta.error}</span>}
+            {hasError && <span className={styles.formControl}>{meta.error}</span>}
         </>
     )
 }
