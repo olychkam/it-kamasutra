@@ -33,7 +33,7 @@ export const authAPI = {
         return instance.post(`auth/login`, {email, password, rememberMe})
     },
     logout() {
-        return instance.delete(`auth/me`)
+        return instance.delete(`auth/login`)
     }
 }
 export const profileAPI = {
