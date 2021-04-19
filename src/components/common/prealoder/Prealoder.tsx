@@ -7,7 +7,7 @@ type PrealoderType={
 
 const Prealoder=(props:PrealoderType)=>{
     return <div>
-        <img src={preolader}/>
+        //<img src={preolader}/>
     </div>
 }
 export default Prealoder;

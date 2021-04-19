@@ -5,7 +5,6 @@ import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Redirect} from 'react-router-dom';
-import {AddMessageReduxForm} from "./addMessageForm";
 
 
 /*export type DialogsPropsType = {
@@ -39,9 +38,7 @@ export function Dialogs(props: DialogsPropsType) {
             <div className={s.messages}>
                 {messagesElements}
             </div>
-            <div>
-                <AddMessageReduxForm onSubmit={addNewMessage}/>
-            </div>
+
 
         </div>
     )

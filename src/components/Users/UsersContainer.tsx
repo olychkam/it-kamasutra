@@ -124,7 +124,7 @@ const
     }
 }*/
 export default compose<React.ComponentType>(
-    withAuthRedirect,
+    //withAuthRedirect,
     connect(mapStateToProps, {
         follow,
         unFollow,

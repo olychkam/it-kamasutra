@@ -3,7 +3,6 @@ import s from './MyPosts.module.css';
 import {Post} from "./Post/Post";
 
 import {MyPostsType} from "./MyPostsContainer";
-import {AddPostReduxForm} from "./addPostForm";
 
 /*export type MyPostsType = {
    posts: Array<PostsType>
@@ -42,7 +41,7 @@ export function MyPosts(props: MyPostsType) {
         <div className={s.postsBlock}>
             <h3>Hi</h3>
 
-            <AddPostReduxForm onSubmit={addNewPost}  />
+
             <div className={s.posts}>
                 {postsElement}
             </div>

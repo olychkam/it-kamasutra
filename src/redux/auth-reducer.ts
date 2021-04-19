@@ -62,14 +62,13 @@ const authReducer = (state: InitialStateType = InitialState, action: AuthActionT
             return state;
     }
 }
-export let setUserData = (/*data:UserDataType|null, isAuth: boolean*/id: number | null, email: string | null, login: string | null, isAuth: boolean): SetDataToAuthStateType => {
+export let setUserData = (id: number | null, email: string | null,
+                          login: string | null, isAuth: boolean): SetDataToAuthStateType => {
     return {
         type: SET_USER_DATA,
         payload: {
             id, email, login, isAuth
         }
-        /*data,
-        isAuth*/
     } as const
 }
 export const getUserData = () => (dispatch: any) => {
@@ -81,7 +80,7 @@ export const getUserData = () => (dispatch: any) => {
             }
         })
 }
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
+export const login = (email: string | null, password: string | null, rememberMe: boolean) => (dispatch: any) => {
     debugger
     authAPI.login(email, password, rememberMe)
         .then(response => {

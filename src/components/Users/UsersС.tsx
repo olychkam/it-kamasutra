@@ -4,7 +4,7 @@ import s from './Users.module.css'
 import axios from "axios";
 import usersPhoto from '../../assets/images/users.png'
 import {inspect} from "util";
-import {setCurrentPage, setToggleIsFetching, UsersType} from "../../redux/users-reducer";
+import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import {usersAPI} from "../../api/api";
 
