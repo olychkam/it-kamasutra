@@ -23,7 +23,7 @@ const mapStateToProps = (state:StateType):mapStateToPropsType => {
 }
 const mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
     return {
-        addPost:(messageForNewPost:any)=>{
+        addPost:(messageForNewPost:string)=>{
             dispatch(addPostAC(messageForNewPost))
         }
     }
