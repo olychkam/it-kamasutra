@@ -1,6 +1,6 @@
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
-export type ActionsTypes = ReturnType<typeof sendMessageBodyAC>
+export type ActionsDialogsTypes = ReturnType<typeof sendMessageBodyAC>
 
 type DialogsType = {
     id: number
@@ -32,7 +32,7 @@ export let initialState: InitialStateType = {
     newMessageBody: ''
 }
 
-const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+const dialogsReducer = (state: InitialStateType = initialState, action: ActionsDialogsTypes): InitialStateType => {
     switch (action.type) {
         case SEND_MESSAGE:
             let body = action.newMessageBody
