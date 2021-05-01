@@ -3,14 +3,15 @@ import s from './ProfileInfo.module.css';
 import Prealoder from "../../common/prealoder/Prealoder";
 import {ProfileType} from "../../../redux/profile-reducer";
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusWithHooks} from './ProfileStatusWithHooks';
 
-type ProfileInfoType={
-    profile:ProfileType
-    status:string
-    updateStatus:(status:string)=>void
+type ProfileInfoType = {
+    profile: ProfileType
+    status: string
+    updateStatus: (status: string) => void
 }
 
-export function ProfileInfo(props:ProfileInfoType) {
+export function ProfileInfo(props: ProfileInfoType) {
 
     return (
 
@@ -22,7 +23,7 @@ export function ProfileInfo(props:ProfileInfoType) {
             </div>*/}
             <img src={props.profile.photos.small}/>
             <div className={s.description}>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
 
