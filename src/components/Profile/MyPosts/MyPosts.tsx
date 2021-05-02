@@ -50,3 +50,4 @@ export function MyPosts(props: MyPostsType) {
 
     )
 }
+export const MemoizedMyPosts = React.memo(MyPosts)

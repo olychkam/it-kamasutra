@@ -1,6 +1,6 @@
 import React from 'react';
 import {addPostAC, InitialStateType} from "../../../redux/profile-reducer";
-import {MyPosts} from "./MyPosts";
+import {MemoizedMyPosts, MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {StateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
@@ -29,5 +29,5 @@ const mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
     }
 }
 
-const MyPostContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts);
+const MyPostContainer = connect(mapStateToProps,mapDispatchToProps)(MemoizedMyPosts);
 export default MyPostContainer;
