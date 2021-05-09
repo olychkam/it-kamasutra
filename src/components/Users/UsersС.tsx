@@ -7,6 +7,7 @@ import {inspect} from "util";
 import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import {usersAPI} from "../../api/api";
+import Paginator from "../common/paginator/Paginator";
 
 export type UsersPropsType = {
     users: Array<UsersType>,
@@ -23,20 +24,10 @@ export type UsersPropsType = {
 }
 const UsersC = (props: UsersPropsType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages: Array<number> = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
     return <div>
-        <div>
-            {pages.map(p => {
-                return <span onClick={(e) => {
-                    props.onPageChanged(p)
-                }} className={props.currentPage === p ? s.selectedPage : ''}>{p}</span>
-            })}
-        </div>
+        <Paginator pageSize={props.pageSize} totalUsersCount={props.totalUsersCount}
+                   currentPage={props.currentPage}
+                   onPageChanged={props.onPageChanged}/>
         {
             props.users.map(u => <div key={u.id}>
             <span>

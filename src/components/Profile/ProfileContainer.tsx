@@ -49,7 +49,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     }
 
     render() {
-
+debugger
         if (!this.props.profile) {
             return <Prealoder/>
         }

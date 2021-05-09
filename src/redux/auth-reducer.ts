@@ -71,36 +71,26 @@ export let setUserData = (id: number | null, email: string | null,
         }
     } as const
 }
-export const getUserData = (): AppThunk => (dispatch) => {
-    return authAPI.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data
-                dispatch(setUserData(id, email, login, true))
-            }
-        })
+export const getUserData = (): AppThunk => async (dispatch) => {
+    let response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data
+        dispatch(setUserData(id, email, login, true))
+    }
 }
 export const login = (email: string | null, password: string | null, rememberMe: boolean): AppThunk =>
-    (dispatch) => {
-        debugger
-        authAPI.login(email, password, rememberMe)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(getUserData())
-                }
-            })
-
+    async (dispatch) => {
+        let response = await authAPI.login(email, password, rememberMe)
+        if (response.data.resultCode === 0) {
+            dispatch(getUserData())
+        }
     }
 export const logout = (): AppThunk =>
-    (dispatch) => {
-        authAPI.logout()
-            .then(response => {
-                if (response.data.resultCode === 0) {
-
-                    dispatch(setUserData(null, null, null, false))
-                }
-            })
-
+    async (dispatch) => {
+        let response = await authAPI.logout()
+        if (response.data.resultCode === 0) {
+            dispatch(setUserData(null, null, null, false))
+        }
     }
 
 export default authReducer;

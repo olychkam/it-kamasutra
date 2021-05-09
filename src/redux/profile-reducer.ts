@@ -120,23 +120,20 @@ export let setStatus = (status: string) => {
     } as const
 }
 export const getUserProfile = (userId: string): AppThunk =>
-    (dispatch) => {
-        usersAPI.getProfile(userId).then(response => {
-            dispatch(setUserProfile(response.data));
-        })
+    async (dispatch) => {
+        let response = await usersAPI.getProfile(userId)
+        dispatch(setUserProfile(response.data));
     }
 export const getStatus = (userId: string): AppThunk =>
-    (dispatch) => {
-        profileAPI.getStatus(userId).then(response => {
-            dispatch(setStatus(response.data));
-        })
+    async (dispatch) => {
+        const response = await profileAPI.getStatus(userId)
+        dispatch(setStatus(response.data));
     }
 export const updateStatus = (status: string): AppThunk =>
-    (dispatch) => {
-        profileAPI.updateStatus(status).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setStatus(status));
-            }
-        })
+    async (dispatch) => {
+        let response = await profileAPI.updateStatus(status)
+        if (response.data.resultCode === 0) {
+            dispatch(setStatus(status));
+        }
     }
 export default profileReducer;
