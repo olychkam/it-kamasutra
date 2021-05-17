@@ -3,7 +3,14 @@ import {Profile} from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
-import {getStatus, getUserProfile, ProfileType, setUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {
+    getStatus,
+    getUserProfile,
+    ProfileType,
+    savePhoto,
+    setUserProfile,
+    updateStatus
+} from "../../redux/profile-reducer";
 import Prealoder from "../common/prealoder/Prealoder";
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 import {usersAPI} from "../../api/api";
@@ -26,6 +33,8 @@ type mapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string) => void
     updateStatus: (status: string) => void
+    savePhoto:(file:string)=>void
+
 }
 
 type PatchParamsType = {
@@ -65,8 +74,10 @@ componentDidUpdate(prevProps: Readonly<ProfileContainerType>, prevState: Readonl
         return (
             <div>
                 <Profile {...this.props} profile={this.props.profile}
+                         isOwner={!this.props.match.params.userId}
                          status={this.props.status}
-                         updateStatus={this.props.updateStatus}/>
+                         updateStatus={this.props.updateStatus}
+                         savePhoto={this.props.savePhoto}/>
             </div>
         )
     }
@@ -77,7 +88,7 @@ const mapStateToProps = (state: StateType): mapStateToPropsType => ({
     status: state.profilePage.status,
 })
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus,savePhoto}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

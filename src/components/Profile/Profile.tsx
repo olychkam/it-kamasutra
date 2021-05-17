@@ -9,6 +9,8 @@ type ProfileTypes = {
     profile:ProfileType
     status:string
     updateStatus:(status:string)=>void
+    isOwner:boolean
+    savePhoto:(file:any)=>void
     //posts: Array<PostsType>
     //message: string
     //store:StoreType
@@ -18,7 +20,7 @@ type ProfileTypes = {
 export function Profile(props: ProfileTypes){
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileInfo savePhoto={props.savePhoto} isOwner={props.isOwner} profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostContainer/>
         </div>
     )

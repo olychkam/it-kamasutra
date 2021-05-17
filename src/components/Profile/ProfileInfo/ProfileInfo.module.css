@@ -2,6 +2,7 @@
     padding: 10px;
 }
 .mainPhoto{
-    max-height: 170px;
+    max-height: 300px;
     margin: 5px;
+    border-radius: 75px;
 }
