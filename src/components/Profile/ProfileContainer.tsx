@@ -19,13 +19,13 @@ import {compose} from "redux";
 }*/
 type mapStateToPropsType = {
     profile: ProfileType | null
-    status:string,
+    status: string,
 }
 
 type mapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string) => void
-    updateStatus:(status:string)=>void
+    updateStatus: (status: string) => void
 }
 
 type PatchParamsType = {
@@ -36,11 +36,11 @@ type onProfileContainerType = mapStateToPropsType & mapDispatchToPropsType
 type ProfileContainerType = RouteComponentProps<PatchParamsType> & onProfileContainerType
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = '11025'
-            if(!userId){
+            if (!userId) {
                 this.props.history.push('/login')
             }
         }
@@ -48,8 +48,17 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         this.props.getStatus(userId)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+componentDidUpdate(prevProps: Readonly<ProfileContainerType>, prevState: Readonly<{}>, snapshot?: any) {
+        if(this.props.match.params.userId!=prevProps.match.params.userId){
+            this.refreshProfile()
+        }
+}
+
     render() {
-debugger
+        debugger
         if (!this.props.profile) {
             return <Prealoder/>
         }
@@ -65,10 +74,10 @@ debugger
 
 const mapStateToProps = (state: StateType): mapStateToPropsType => ({
     profile: state.profilePage.profile,
-    status:state.profilePage.status,
+    status: state.profilePage.status,
 })
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile,getStatus,updateStatus}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

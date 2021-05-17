@@ -1,3 +1,7 @@
 .description{
     padding: 10px;
 }
+.mainPhoto{
+    max-height: 170px;
+    margin: 5px;
+}
