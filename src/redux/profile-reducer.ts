@@ -19,7 +19,7 @@ type PostsType = {
     message: string
     likesCount: number
 }
-type ContactsType = {
+export type ContactsType = {
     facebook: string
     website: string,
     vk: string

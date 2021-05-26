@@ -1,17 +1,19 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Prealoder from "../../common/prealoder/Prealoder";
 import users from "../../../assets/images/users.png";
-import {ProfileType} from "../../../redux/profile-reducer";
+import {ContactsType, ProfileType} from "../../../redux/profile-reducer";
 import {ProfileStatus} from "./ProfileStatus";
 import {ProfileStatusWithHooks} from './ProfileStatusWithHooks';
+import {ProfileData} from './ProfileData/ProfileData';
+import { ProfileDataForm } from './ProfileDataForm/ProfileDataForm';
 
 type ProfileInfoType = {
     profile: ProfileType
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
-    savePhoto:(file:any)=>void
+    savePhoto: (file: any) => void
 }
 
 export function ProfileInfo(props: ProfileInfoType) {
@@ -21,7 +23,7 @@ export function ProfileInfo(props: ProfileInfoType) {
             props.savePhoto(e.target.files[0]);
         }
     }
-
+const [editMode,setEditMode]=useState<boolean>(false)
     return (
 
         <div className={s.content}>
@@ -32,10 +34,21 @@ export function ProfileInfo(props: ProfileInfoType) {
             </div>*/}
             <img src={props.profile.photos.small || users} className={s.mainPhoto}/>
             {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
+            {editMode ? <ProfileDataForm profile={props.profile} isOwner={props.isOwner}/> :
+                <ProfileData goToEditMode={()=>{setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}
             <div className={s.description}>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
 
     )
+}
+
+
+type PropsType = {
+    contactTitle: string,
+    contactValue: string | null
+}
+export const Contact: React.FC<PropsType> = ({contactTitle, contactValue}) => {
+    return <div className={s.contact}><b>{contactTitle}</b>:{contactValue}</div>
 }
